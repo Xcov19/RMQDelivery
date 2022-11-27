@@ -19,6 +19,6 @@ It is exciting because it is in-house and can be deployed by anyone with easy to
 
 ### References
 
-- [Redis Streams](https://huogerac.hashnode.dev/using-redis-stream-with-python)
+- [Redis Streams](https://aws.amazon.com/redis/Redis_Streams/)
 - [Redis Streams core commands](https://redis-py.readthedocs.io/en/stable/commands.html?highlight=xadd#redis.commands.core.CoreCommands.xadd)
 - [Using Redis Stream with Python](https://huogerac.hashnode.dev/using-redis-stream-with-python)
