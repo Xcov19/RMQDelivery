@@ -41,17 +41,18 @@ class RedisConsumer(IConsumer, Singleton):
     def consume(self, consumer_id: type_consumer_id, data: dict, **optional_attrs) -> None:
         """Consume input."""
         callback_args = {}
-        function_ref: Optional[Callable] = optional_attrs.get("function_ref")
         queue = rq.Queue.from_queue_key(consumer_id, connection=self.redis_conn)
-        json_data = json.dumps(data)
+        function_ref: Optional[Callable] = optional_attrs.get("function_ref")
+        if not function_ref:
+            function_ref = (lambda result: result)
         on_success_callback: Optional[Callable] = optional_attrs.get("on_success_callback")
         on_failure_callback: Optional[Callable] = optional_attrs.get("on_failure_callback")
         if on_success_callback:
             callback_args |= dict(on_success=on_success_callback)
         if on_failure_callback:
             callback_args |= dict(on_failure=on_failure_callback)
-        if not function_ref:
-            function_ref = (lambda result: result)
+
+        json_data = json.dumps(data)
         queue.enqueue(function_ref, json_data, **callback_args)
 
     def _start_worker(self, r_queue: rq.Queue, /, worker_id=None) -> None:

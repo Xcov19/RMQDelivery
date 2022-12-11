@@ -17,6 +17,7 @@ redis = "^4.3.5"
 py-redis = "^1.1.1"
 rq = "^1.11.1"
 hiredis = "^2.0.0"
+uvloop = ">=0.16.0"
 
 
 [tool.poetry.dev-dependencies]
@@ -28,6 +29,8 @@ pre-commit = "^2.17.0"
 pylint = ">=2.14.4"
 isort = ">=5.10.1"
 mypy = ">=0.971"
+anyio = ">=3.6.1"
+pytest-asyncio = ">=0.19.0"
 
 [tool.pytest.ini_options]
 markers = [
