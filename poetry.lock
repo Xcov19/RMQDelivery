@@ -69,6 +69,19 @@ dev = ["pytest", "cogapp", "pre-commit", "wheel"]
 tests = ["pytest"]
 
 [[package]]
+name = "astroid"
+version = "2.12.13"
+description = "An abstract syntax tree for Python with inference support."
+category = "dev"
+optional = false
+python-versions = ">=3.7.2"
+
+[package.dependencies]
+lazy-object-proxy = ">=1.4.0"
+typing-extensions = {version = ">=3.10", markers = "python_version < \"3.10\""}
+wrapt = {version = ">=1.11,<2", markers = "python_version < \"3.11\""}
+
+[[package]]
 name = "async-timeout"
 version = "4.0.2"
 description = "Timeout context manager for asyncio programs"
@@ -92,13 +105,14 @@ tests_no_zope = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>
 
 [[package]]
 name = "black"
-version = "22.10.0"
+version = "22.12.0"
 description = "The uncompromising code formatter."
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 
 [package.dependencies]
+aiohttp = {version = ">=3.7.4", optional = true, markers = "extra == \"d\""}
 click = ">=8.0.0"
 mypy-extensions = ">=0.4.3"
 pathspec = ">=0.9.0"
@@ -130,6 +144,14 @@ python-versions = "*"
 
 [package.dependencies]
 pycparser = "*"
+
+[[package]]
+name = "cfgv"
+version = "3.3.1"
+description = "Validate configuration and produce human readable error messages."
+category = "dev"
+optional = false
+python-versions = ">=3.6.1"
 
 [[package]]
 name = "charset-normalizer"
@@ -189,15 +211,46 @@ optional = false
 python-versions = ">=3.7"
 
 [[package]]
+name = "dill"
+version = "0.3.6"
+description = "serialize all of python"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[package.extras]
+graph = ["objgraph (>=1.7.2)"]
+
+[[package]]
+name = "distlib"
+version = "0.3.6"
+description = "Distribution utilities"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "exceptiongroup"
 version = "1.0.4"
 description = "Backport of PEP 654 (exception groups)"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.7"
 
 [package.extras]
 test = ["pytest (>=6)"]
+
+[[package]]
+name = "filelock"
+version = "3.8.2"
+description = "A platform independent file lock."
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[package.extras]
+docs = ["furo (>=2022.9.29)", "sphinx (>=5.3)", "sphinx-autodoc-typehints (>=1.19.5)"]
+testing = ["covdefaults (>=2.2.2)", "coverage (>=6.5)", "pytest (>=7.2)", "pytest-cov (>=4)", "pytest-timeout (>=2.1)"]
 
 [[package]]
 name = "flask"
@@ -235,6 +288,17 @@ optional = false
 python-versions = ">=3.6"
 
 [[package]]
+name = "identify"
+version = "2.5.9"
+description = "File identification library for Python"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[package.extras]
+license = ["ukkonen"]
+
+[[package]]
 name = "idna"
 version = "3.4"
 description = "Internationalized Domain Names in Applications (IDNA)"
@@ -262,7 +326,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "flake8 (<5)", "pytest-co
 name = "iniconfig"
 version = "1.1.1"
 description = "iniconfig: brain-dead simple config-ini parsing"
-category = "main"
+category = "dev"
 optional = false
 python-versions = "*"
 
@@ -273,6 +337,20 @@ description = "Simple module to parse ISO 8601 dates"
 category = "main"
 optional = false
 python-versions = ">=3.6.2,<4.0"
+
+[[package]]
+name = "isort"
+version = "5.10.1"
+description = "A Python utility / library to sort Python imports."
+category = "dev"
+optional = false
+python-versions = ">=3.6.1,<4.0"
+
+[package.extras]
+pipfile_deprecated_finder = ["pipreqs", "requirementslib"]
+requirements_deprecated_finder = ["pipreqs", "pip-api"]
+colors = ["colorama (>=0.4.3,<0.5.0)"]
+plugins = ["setuptools"]
 
 [[package]]
 name = "itsdangerous"
@@ -313,12 +391,28 @@ MarkupSafe = ">=2.0"
 i18n = ["Babel (>=2.7)"]
 
 [[package]]
+name = "lazy-object-proxy"
+version = "1.8.0"
+description = "A fast and thorough lazy object proxy."
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[[package]]
 name = "markupsafe"
 version = "2.1.1"
 description = "Safely add untrusted strings to HTML/XML markup."
 category = "main"
 optional = false
 python-versions = ">=3.7"
+
+[[package]]
+name = "mccabe"
+version = "0.7.0"
+description = "McCabe checker, plugin for flake8"
+category = "dev"
+optional = false
+python-versions = ">=3.6"
 
 [[package]]
 name = "multidict"
@@ -329,12 +423,39 @@ optional = false
 python-versions = ">=3.7"
 
 [[package]]
+name = "mypy"
+version = "0.991"
+description = "Optional static typing for Python"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+mypy-extensions = ">=0.4.3"
+tomli = {version = ">=1.1.0", markers = "python_version < \"3.11\""}
+typing-extensions = ">=3.10"
+
+[package.extras]
+dmypy = ["psutil (>=4.0)"]
+install-types = ["pip"]
+python2 = ["typed-ast (>=1.4.0,<2)"]
+reports = ["lxml"]
+
+[[package]]
 name = "mypy-extensions"
 version = "0.4.3"
 description = "Experimental type system extensions for programs checked with the mypy typechecker."
 category = "dev"
 optional = false
 python-versions = "*"
+
+[[package]]
+name = "nodeenv"
+version = "1.7.0"
+description = "Node.js virtual environment builder"
+category = "dev"
+optional = false
+python-versions = ">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*"
 
 [[package]]
 name = "numpy"
@@ -348,7 +469,7 @@ python-versions = ">=3.8"
 name = "packaging"
 version = "22.0"
 description = "Core utilities for Python packages"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.7"
 
@@ -383,7 +504,7 @@ totp = ["cryptography"]
 
 [[package]]
 name = "pathspec"
-version = "0.10.2"
+version = "0.10.3"
 description = "Utility library for gitignore style pattern matching of file paths."
 category = "dev"
 optional = false
@@ -405,13 +526,29 @@ test = ["appdirs (==1.4.4)", "pytest-cov (>=4)", "pytest-mock (>=3.10)", "pytest
 name = "pluggy"
 version = "1.0.0"
 description = "plugin and hook calling mechanisms for python"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.6"
 
 [package.extras]
 testing = ["pytest-benchmark", "pytest"]
 dev = ["tox", "pre-commit"]
+
+[[package]]
+name = "pre-commit"
+version = "2.20.0"
+description = "A framework for managing and maintaining multi-language pre-commit hooks."
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+cfgv = ">=2.0.0"
+identify = ">=1.0.0"
+nodeenv = ">=0.11.1"
+pyyaml = ">=5.1"
+toml = "*"
+virtualenv = ">=20.0.8"
 
 [[package]]
 name = "protobuf"
@@ -457,6 +594,29 @@ optional = false
 python-versions = ">=3.6"
 
 [[package]]
+name = "pylint"
+version = "2.15.8"
+description = "python code static checker"
+category = "dev"
+optional = false
+python-versions = ">=3.7.2"
+
+[package.dependencies]
+astroid = ">=2.12.13,<=2.14.0-dev0"
+colorama = {version = ">=0.4.5", markers = "sys_platform == \"win32\""}
+dill = ">=0.2"
+isort = ">=4.2.5,<6"
+mccabe = ">=0.6,<0.8"
+platformdirs = ">=2.2.0"
+tomli = {version = ">=1.1.0", markers = "python_version < \"3.11\""}
+tomlkit = ">=0.10.1"
+typing-extensions = {version = ">=3.10.0", markers = "python_version < \"3.10\""}
+
+[package.extras]
+spelling = ["pyenchant (>=3.2,<4.0)"]
+testutils = ["gitpython (>3)"]
+
+[[package]]
 name = "pyseto"
 version = "1.6.12"
 description = "A Python implementation of PASETO/PASERK."
@@ -477,7 +637,7 @@ docs = ["Sphinx[docs] (>=4.3.2,<6.0.0)", "sphinx-autodoc-typehints[docs] (==1.12
 name = "pytest"
 version = "7.2.0"
 description = "pytest: simple powerful testing with Python"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.7"
 
@@ -525,6 +685,14 @@ doc = ["tabulate (>=0.8.9)", "sphinx (>=4.5.0)"]
 gen_docs = ["sphinx (>=4.5.0)", "sphinx-autodoc-typehints (>=1.18.1)", "sphinx-rtd-theme (>=1.0.0)", "pytoolconfig"]
 global = ["appdirs (>=1.4.4)"]
 validation = ["pydantic (>=1.7.4)"]
+
+[[package]]
+name = "pyyaml"
+version = "6.0"
+description = "YAML parser and emitter for Python"
+category = "dev"
+optional = false
+python-versions = ">=3.6"
 
 [[package]]
 name = "redis"
@@ -648,9 +816,17 @@ python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
 name = "tomli"
 version = "2.0.1"
 description = "A lil' TOML parser"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.7"
+
+[[package]]
+name = "tomlkit"
+version = "0.11.6"
+description = "Style preserving TOML library"
+category = "dev"
+optional = false
+python-versions = ">=3.6"
 
 [[package]]
 name = "typing-extensions"
@@ -682,6 +858,23 @@ secure = ["pyOpenSSL (>=0.14)", "cryptography (>=1.3.4)", "idna (>=2.0.0)", "cer
 socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 
 [[package]]
+name = "virtualenv"
+version = "20.17.1"
+description = "Virtual Python Environment builder"
+category = "dev"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+distlib = ">=0.3.6,<1"
+filelock = ">=3.4.1,<4"
+platformdirs = ">=2.4,<3"
+
+[package.extras]
+docs = ["proselint (>=0.13)", "sphinx (>=5.3)", "sphinx-argparse (>=0.3.2)", "sphinx-rtd-theme (>=1)", "towncrier (>=22.8)"]
+testing = ["coverage (>=6.2)", "coverage-enable-subprocess (>=1)", "flaky (>=3.7)", "packaging (>=21.3)", "pytest (>=7.0.1)", "pytest-env (>=0.6.2)", "pytest-freezegun (>=0.4.2)", "pytest-mock (>=3.6.1)", "pytest-randomly (>=3.10.3)", "pytest-timeout (>=2.1)"]
+
+[[package]]
 name = "werkzeug"
 version = "2.2.2"
 description = "The comprehensive WSGI web application library."
@@ -702,6 +895,14 @@ description = "A patch parsing and application library."
 category = "dev"
 optional = false
 python-versions = ">=3.7"
+
+[[package]]
+name = "wrapt"
+version = "1.14.1"
+description = "Module for decorators, wrappers and monkey patching."
+category = "dev"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 
 [[package]]
 name = "yapf"
@@ -738,7 +939,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "flake8 (<5)", "pytest-co
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8.0,<3.11"
-content-hash = "dcc1cc81ee1d98c8bf9d951fade0f35ae1531eacce5230b71251a2338de09ed9"
+content-hash = "5e26f3825b84e5c6ce5f2e8a52f2141de04c32f02e801a222a4dbe92ae8d193f"
 
 [metadata.files]
 aiohttp = []
@@ -746,30 +947,41 @@ aiosignal = []
 appdirs = []
 argon2-cffi = []
 argon2-cffi-bindings = []
+astroid = []
 async-timeout = []
 attrs = []
 black = []
 certifi = []
 cffi = []
+cfgv = []
 charset-normalizer = []
 click = []
 colorama = []
 cryptography = []
 debugpy = []
+dill = []
+distlib = []
 exceptiongroup = []
+filelock = []
 flask = []
 frozenlist = []
 hiredis = []
+identify = []
 idna = []
 importlib-metadata = []
 iniconfig = []
 iso8601 = []
+isort = []
 itsdangerous = []
 jedi = []
 jinja2 = []
+lazy-object-proxy = []
 markupsafe = []
+mccabe = []
 multidict = []
+mypy = []
 mypy-extensions = []
+nodeenv = []
 numpy = []
 packaging = []
 parso = []
@@ -777,15 +989,18 @@ passlib = []
 pathspec = []
 platformdirs = []
 pluggy = []
+pre-commit = []
 protobuf = []
 py-redis = []
 pycparser = []
 pycryptodomex = []
 pyflakes = []
+pylint = []
 pyseto = []
 pytest = []
 python-lsp-jsonrpc = []
 pytoolconfig = []
+pyyaml = []
 redis = []
 replit = []
 replit-python-lsp-server = []
@@ -794,11 +1009,14 @@ rope = []
 rq = []
 toml = []
 tomli = []
+tomlkit = []
 typing-extensions = []
 ujson = []
 urllib3 = []
+virtualenv = []
 werkzeug = []
 whatthepatch = []
+wrapt = []
 yapf = []
 yarl = []
 zipp = []

@@ -1,6 +1,6 @@
 import json
 import os
-from typing import Optional
+from typing import Optional, Callable
 
 import redis
 import rq
@@ -30,22 +30,29 @@ class RedisConsumer(IConsumer, Singleton):
             self, channel: Optional[Channelable] = None, **kwargs
     ) -> type_consumer_id:
         """Set up the consumer."""
+        worker_id = kwargs.pop("worker_id", None)
         queue = rq.Queue(
-            name=channel, connection=self.redis_conn, serializer=RQJSONSerializer
+            name=channel, connection=self.redis_conn, serializer=RQJSONSerializer, **kwargs
         )
-        self._start_worker(queue, worker_id=kwargs.get("worker_id"))
+        if worker_id:
+            self._start_worker(queue, worker_id=worker_id)
         return queue.key
 
     def consume(self, consumer_id: type_consumer_id, data: dict, **optional_attrs) -> None:
         """Consume input."""
-        worker_id = optional_attrs.get("worker_id")
-        worker = self._find_worker(worker_id) if worker_id else None
-        function_ref = optional_attrs.get("function_ref")
-        worker.all_keys()
+        callback_args = {}
+        function_ref: Optional[Callable] = optional_attrs.get("function_ref")
         queue = rq.Queue.from_queue_key(consumer_id, connection=self.redis_conn)
         json_data = json.dumps(data)
-        # TODO(@codecakes): Add on failure, on_success callbacks.
-        queue.enqueue(function_ref, json_data)
+        on_success_callback: Optional[Callable] = optional_attrs.get("on_success_callback")
+        on_failure_callback: Optional[Callable] = optional_attrs.get("on_failure_callback")
+        if on_success_callback:
+            callback_args |= dict(on_success=on_success_callback)
+        if on_failure_callback:
+            callback_args |= dict(on_failure=on_failure_callback)
+        if not function_ref:
+            function_ref = (lambda result: result)
+        queue.enqueue(function_ref, json_data, **callback_args)
 
     def _start_worker(self, r_queue: rq.Queue, /, worker_id=None) -> None:
         """Start a worker."""
