@@ -1,10 +1,7 @@
 [tool.poetry]
 name = "python-template"
 version = "0.1.0"
-description = """A redis based queueing and streaming package built on redis queue package `rq` and redis `streams` or redis `pubsub`.
-
-Any service can use it to create a dedicated queue and dedicated consumer group for streaming so that external services can consume from dedicated channels.
-"""
+description = """A redis based queueing and streaming package built on redis queue package rq and redis streams or redis pubsub."""
 authors = ["Akul Mathur <akulmat@proton.me>"]
 
 [tool.poetry.dependencies]

@@ -23,14 +23,22 @@ class Singleton:
     assert id(a) == id(f)
     print(id(a), id(f), id(b))
     """
+
     _shared_state = {}
     _classes: Dict = {}
 
+    __slots__ = (
+        "__dict__",
+        "_instance_class",
+    )
+
     def __init__(self):
         self.__dict__ = self._shared_state
+        self._instance_class = self._classes
 
     def __new__(cls, *args, **kwargs):
         if not (instance := cls._classes.get(cls)):
+            # You cannot do cls(*args, **kwargs)
             instance = cls._classes[cls] = object.__new__(cls, *args, **kwargs)
 
         __doc__ = instance.__doc__

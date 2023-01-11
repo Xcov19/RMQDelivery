@@ -29,7 +29,9 @@ class IConsumer(Protocol):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def consume(self, consumer_id: type_consumer_id, data: dict, **optional_attrs) -> None:
+    def consume(
+        self, consumer_id: type_consumer_id, data: dict, **optional_attrs
+    ) -> None:
         """Consume input."""
         raise NotImplementedError
 
