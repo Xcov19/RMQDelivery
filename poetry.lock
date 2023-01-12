@@ -300,7 +300,7 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "identify"
-version = "2.5.12"
+version = "2.5.13"
 description = "File identification library for Python"
 category = "dev"
 optional = false
@@ -721,7 +721,7 @@ python-versions = ">=3.6"
 
 [[package]]
 name = "redis"
-version = "4.4.1"
+version = "4.4.2"
 description = "Python client for Redis database and key-value store"
 category = "main"
 optional = false
@@ -879,7 +879,7 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "urllib3"
-version = "1.26.13"
+version = "1.26.14"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
 category = "main"
 optional = false
