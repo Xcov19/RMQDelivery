@@ -38,7 +38,7 @@ class RedisConsumer(IConsumer, Singleton):
         """Closes connection."""
         self.redis_conn.close()
 
-    def setup(
+    async def setup(
         self, channel: Optional[Channelable] = None, **kwargs
     ) -> type_consumer_id:
         """Set up the consumer."""
