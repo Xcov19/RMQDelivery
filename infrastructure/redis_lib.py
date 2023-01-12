@@ -34,6 +34,10 @@ class RedisConsumer(IConsumer, Singleton):
         redis_port = os.getenv("REDIS_PORT", 6379)
         self.redis_conn = redis.Redis(host=redis_host, port=redis_port, **kwargs)
 
+    def close(self):
+        """Closes connection."""
+        self.redis_conn.close()
+
     def setup(
         self, channel: Optional[Channelable] = None, **kwargs
     ) -> type_consumer_id:
