@@ -1,0 +1,41 @@
+version: "3"
+
+
+networks:
+  app-network:
+    driver: bridge
+
+
+services:
+  redis:
+#    See: https://hub.docker.com/r/bitnami/redis/
+    image: "bitnami/redis:latest"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=no
+      - REDIS_PASSWORD=redis
+      - REDIS_AOF_ENABLED=no
+    networks:
+      - app-network
+    ports:
+      - "6378:6379"
+    volumes:
+      - ./redis-data:/bitnami/redis/data
+
+  rmq:
+#    entrypoint: sh start.sh
+    restart: always
+    container_name: rmq
+    build:
+      context: .
+      dockerfile: Dockerfile
+    hostname: rmq
+    links:
+      - redis
+    environment:
+      - ENV=${ENV}
+      - LOCAL_PORT=${LOCAL_PORT}
+      - REDIS_PASSWORD=redis
+    networks:
+      - app-network
+    volumes:
+      - ./storage:/storage
