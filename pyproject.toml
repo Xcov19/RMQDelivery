@@ -6,28 +6,29 @@ authors = ["Akul Mathur <akulmat@proton.me>"]
 
 [tool.poetry.dependencies]
 python = ">=3.8.0,<3.11"
-numpy = "^1.22.2"
-replit = "^3.2.4"
-Flask = "^2.2.0"
 urllib3 = "^1.26.12"
 redis = "^4.3.5"
 py-redis = "^1.1.1"
 rq = "^1.11.1"
 hiredis = "^2.0.0"
 uvloop = ">=0.16.0"
+redis-om = "^0.1.2"
+pydantic = "^1.10.7"
+typing_extensions = "^4.4.0"
 
 
 [tool.poetry.dev-dependencies]
-debugpy = "^1.6.2"
+debugpy = "^1.6.7"
 replit-python-lsp-server = {extras = ["yapf", "rope", "pyflakes"], version = "^1.5.9"}
 black = {extras = ["d", "click==8.0.2"], version = "^22.10.0"}
-pytest = "~7.2.0"
-pre-commit = "^2.17.0"
-pylint = ">=2.14.4"
-isort = ">=5.10.1"
-mypy = ">=0.971"
+pytest = "~7.3.1"
+pre-commit = "^3.2.0"
+pylint = "^2.17.4"
+isort = "^5.12.0"
+mypy = "^1.2.0"
 anyio = ">=3.6.1"
-pytest-asyncio = ">=0.19.0"
+pytest-asyncio = "^0.21.0"
+
 
 [tool.pytest.ini_options]
 markers = [
