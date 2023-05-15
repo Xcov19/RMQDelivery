@@ -1,14 +1,27 @@
 ## TL;DR
 A redis based queueing and streaming package built on redis queue package `rq` and redis `streams` or redis `pubsub`.
 
-Any service can use it to create a dedicated queue and dedicated consumer group for streaming so that external services can consume from dedicated channels.
+This is a wrapper around `rq` and `redis-py` to provide a simple interface to enqueue and dequeue messages from a queue and stream messages from a channel.
+
+Any service can use it to create:
+- a dedicated queue channel and;
+- a dedicated consumer group for streaming so that external services can consume from dedicated channels.
 
 ### Motivation
 
-We need a custom zapier like enqueue/push and pull/stream/publish service with at-least once delivery using streams or at-most once delivery using lightweight redis pub-sub depending on the use case.
+We need an at-least once delivery mechanism using:
+- a custom enqueue/dequeue and
+- publish/pull service using streams.
 
-It is exciting because it is in-house and can be deployed by anyone with easy to use abstract interfaces and can be forked, built-on top of.
 
+It is exciting because it can be dropped in for
+testing with in-house development and can be
+deployed by anyone with easy to use abstract
+interfaces and can be forked, built on-top of
+redis ecosystem, no need to explore beyond the
+redis stack.
+
+![image info](overview.png)
 
 ### Direct & Indirect Dependencies:
 - redis-py
