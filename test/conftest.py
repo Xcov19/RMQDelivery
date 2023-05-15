@@ -72,11 +72,7 @@ def stub_args() -> Tuple[int, ...]:
 @pytest.fixture(scope="function")
 def stub_task_param_dict() -> (
     Annotated[
-        Dict[
-            str,
-            Any
-            # Callable[[], Callable[[List[Any]], int]] | uuid.UUID | Tuple[int],
-        ],
+        Dict[str, Any],
         pytest.fixture,
     ]
 ):
