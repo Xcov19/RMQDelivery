@@ -1,15 +1,32 @@
 """Dependency Inversion for redis like queue and stream/pubsub protocols."""
 import abc
-from typing import Protocol, Optional, TypeVar, NewType
+from typing import Protocol, Dict, Any, Sequence
 
-type_consumer_id = TypeVar("type_consumer_id", bound=str)
-
-
-class ChannelableType(str):
-    ...
+from core.taskman.domain.entity import Task, TaskQueue, TaskWorker
+from core.utils.types import ChannelableType, ConsumerIdType
 
 
-Channelable = NewType("Channelable", ChannelableType)
+class ITaskQueueRepository(Protocol):
+    """Task Queue Repository Interface."""
+
+    @classmethod
+    @abc.abstractmethod
+    def create(
+        cls,
+        queue_name: str,
+        /,
+        **options: str | Sequence[str] | Sequence[TaskWorker] | Sequence[Task],
+    ) -> None:
+        """Create a queue."""
+        raise NotImplementedError
+
+    @classmethod
+    @abc.abstractmethod
+    def get(
+        cls, queue_name: str, /, **options: Dict[str, Any]
+    ) -> TaskQueue | None:
+        """Get a queue."""
+        raise NotImplementedError
 
 
 class IConsumer(Protocol):
@@ -17,20 +34,24 @@ class IConsumer(Protocol):
 
     Each consumer entry creates a dedicated channel to consume into.
 
-    A channel is a `channelable` queue that is bound to an exchange. The exchange is
-    defined by the consumer and the queue is defined by the channel.
+    A channel is a `channelable` queue that is bound to an exchange.
+    The exchange is defined by the consumer and the queue is defined
+    by the channel.
     """
 
     @abc.abstractmethod
     def setup(
-        self, channel: Optional[Channelable] = None, **kwargs
-    ) -> type_consumer_id:
+        self, channel: ChannelableType | None = None, **kwargs: Dict[str, Any]
+    ) -> str:
         """Set up the consumer."""
         raise NotImplementedError
 
     @abc.abstractmethod
     def consume(
-        self, consumer_id: type_consumer_id, data: dict, **optional_attrs
+        self,
+        consumer_id: ConsumerIdType,
+        data: Dict[str, Any],
+        **optional_attrs: Dict[str, Any],
     ) -> None:
         """Consume input."""
         raise NotImplementedError
@@ -43,11 +64,13 @@ class IProducer(Protocol):
     """
 
     @abc.abstractmethod
-    def setup(self, consumer_id: type_consumer_id, **kwargs) -> None:
+    def setup(self, **kwargs: str) -> ChannelableType:
         """Set up the producer."""
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get(self, **optional_attrs) -> None:
-        """Returns output."""
+    def send(
+        self, data: Dict[str, Any], **optional_attrs: Dict[str, Any]
+    ) -> None:
+        """Send output."""
         raise NotImplementedError

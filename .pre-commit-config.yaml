@@ -32,6 +32,8 @@ repos:
     -   id: mypy
         types: [file, python]
         args: [--strict]
+        additional_dependencies:
+            - "pydantic>=1.10.4"
 -   repo: https://github.com/PyCQA/flake8
     rev: 6.0.0
     hooks:
