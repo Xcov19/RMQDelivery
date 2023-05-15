@@ -55,9 +55,7 @@ class TestRegisterQueueUsingQueuingService:
         ), f"Expected task {task} to be enqueued in tasks {task_queue.tasks}."
 
 
-pytest.mark.skip(reason="Not implemented")
-
-
+@pytest.mark.skip(reason="Not implemented")
 class TestDynamicWorkerAllocationUsingQueuingService:
     """Test that workers are allocated dynamically."""
 
