@@ -48,7 +48,7 @@ trio = ["trio (>=0.16,<0.22)"]
 
 [[package]]
 name = "astroid"
-version = "2.15.4"
+version = "2.15.5"
 description = "An abstract syntax tree for Python with inference support."
 category = "dev"
 optional = false
@@ -424,11 +424,11 @@ python-versions = "*"
 
 [[package]]
 name = "pre-commit"
-version = "2.21.0"
+version = "3.3.1"
 description = "A framework for managing and maintaining multi-language pre-commit hooks."
 category = "dev"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 
 [package.dependencies]
 cfgv = ">=2.0.0"
@@ -835,7 +835,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8.0,<3.11"
-content-hash = "a06a36a03bbce0b9b6a52b6b0ae0b45c4f39e8d5129b8014a9f80e1b3c269671"
+content-hash = "d41ad59e1251c80d5deeba109f3bad82ca49b6c298f35472c0730fac9b978b99"
 
 [metadata.files]
 aiohttp = []

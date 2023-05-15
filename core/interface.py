@@ -23,7 +23,10 @@ class ITaskQueueRepository(Protocol):
     @classmethod
     @abc.abstractmethod
     def get(
-        cls, queue_name: str, /, **options: Dict[str, Any]
+        cls,
+        queue_name: str,
+        /,
+        **options: str | Sequence[str] | Sequence[TaskWorker] | Sequence[Task],
     ) -> TaskQueue | None:
         """Get a queue."""
         raise NotImplementedError
