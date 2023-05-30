@@ -5,7 +5,7 @@ author: codecakes
 import uuid
 from typing import Tuple, List, Type, Any, Callable, Dict
 
-from core.interface import ITaskQueueRepository
+from core.taskman.interface import ITaskQueueRepository
 from core.taskman.domain.entity import (
     TaskQueueManagerAggregate,
     Task,
@@ -55,9 +55,17 @@ class QueuingService:
         """Submit a task to a queue."""
         if not (task_queue := self._repo.get(queue_name)):
             raise ValueError(f"Queue {queue_name} does not exist.")
-        return TaskQueueManagerAggregate.create_task(
+        task: Task = TaskQueueManagerAggregate.create_task(
             task_queue, func_descriptor, *args, **task_options
         )
+        self._repo.add_task(
+            queue_name,
+            task.task_func,
+            *task.args,
+            task_status=task.status,
+            **task.options,
+        )
+        return task
 
     # def get_tasks(self, queue_name: str) -> List[Task]:
     #     """Get tasks from a queue."""

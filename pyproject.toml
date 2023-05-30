@@ -5,7 +5,7 @@ description = """A redis based queueing and streaming package built on redis que
 authors = ["Akul Mathur <akulmat@proton.me>"]
 
 [tool.poetry.dependencies]
-python = ">=3.8.0,<3.11"
+python = "^3.11"
 urllib3 = "^1.26.12"
 redis = "^4.4.4"
 py-redis = "^1.1.1"
